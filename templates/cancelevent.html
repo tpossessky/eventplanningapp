@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if name == event.host.username %}
+    <h1>Would You Like to Cancel This Event?</h1>
+                <h4>{{ event.event_title }}</h4>
+                <p>ID: {{ event.event_id }}</p>
+                <p>Host: {{ event.host.username }}</p>
+                <p>Desc: {{ event.event_desc }}</p>
+                <p>Start Time: {{ event.start_time }}</p>
+                <p>End Time: {{ event.end_time }}</p>
+    <div><a class="button" href="{{ url_for('cancel_event_helper',event_id=event.event_id) }}">Confirm</a></div>
+    <div>&nbsp;</div>
+    <div><a class="button" href="{{ url_for('home') }}">Return Home</a></div>
+    {% else %}
+        <h1>You Do Not Have Access to This Event</h1>
+    {%  endif %}
+
+{% endblock %}

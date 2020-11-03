@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="form">
+    <h2>Create an Event</h2>
+  <form action="{{ url_for("createevent") }}" method="post">
+      <h4>Event Title</h4>
+        <label>
+            <input type="text" name="title" />
+        </label>
+      <br />
+      <h4>Description</h4>
+        <label>
+            <input type="text" name="desc" />
+        </label>
+      <br />
+      <h4>Start Time</h4>
+        <label>
+        <input type="datetime-local" id="start-time"
+            name="start-time" value="2020-10-03T19:30"
+            min="2020-10-03T00:00" max="2021-10-03T23:59">
+        </label>
+      <br />
+      <h4>End Time</h4>
+        <label>
+        <input type="datetime-local" id="end-time"
+            name="end-time" value="2020-10-03T19:30"
+            min="2020-10-03T00:00" max="2021-10-03T23:59">
+        </label>
+      <br />
+      <br />
+      <input type="submit" value="Create" />
+  </form>
+        {% if error %}<div class = "error"><strong style="color: red">{{ error }}</strong></div>{% endif %}
+
+    </div>
+{% endblock %}
