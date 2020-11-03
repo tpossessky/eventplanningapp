@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if not name %}
+        {% for event in events %}
+            <h4>{{ event.event_title }}</h4>
+            <p>Host: {{ event.host.username }}</p>
+            <p>{{ event.event_desc }}</p>
+            <p>{{ event.start_time }}</p>
+            <p>{{ event.end_time }}</p>
+            <div class="button"><a href="{{ url_for("login") }}">RSVP</a></div>
+        {% endfor %}
+    {% else %}
+        <h2><u><strong>My Events</strong></u></h2>
+        {% for event in events %}
+            {% if name == event.host.username %}
+                <h4>{{ event.event_title }}</h4>
+                <p>Host: {{ event.host.username }}</p>
+                <p>{{ event.event_desc }}</p>
+                <p>{{ event.start_time }}</p>
+                <p>{{ event.end_time }}</p>
+                <div ><a class="button" href="{{ url_for('cancel_event',event_id=event.event_id) }}">Cancel</a></div>
+            {% endif %}
+        {% endfor %}
+        <h2><u><strong>Other Events</strong></u></h2>
+        {% for event in events %}
+            {% if name != event.host.username %}
+                <h4>{{ event.event_title }}</h4>
+                <p>Host: {{ event.host.username }}</p>
+                <p>{{ event.event_desc }}</p>
+                <p>{{ event.start_time }}</p>
+                <p>{{ event.end_time }}</p>
+                <div class="button"><a href="{{ url_for('register_event', event_id=event.event_id)}}">Register</a></div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
